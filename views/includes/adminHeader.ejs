@@ -1,0 +1,47 @@
+<header class="backdrop-blur-md bg-white/10 border-b border-white/20 px-8 py-4 flex justify-between items-center shadow-lg **relative z-[100]**">
+  <div class="text-2xl font-bold text-white tracking-wide">
+    Task<span class="text-emerald-300">Manager</span>
+  </div>
+
+  <nav class="hidden md:flex gap-6 text-white text-sm font-medium">
+    <a href="/admin/Dashboard" class="hover:text-emerald-300 transition">Dashboard</a>
+    <a href="/admin/invite/dashboard" class="hover:text-emerald-300 transition">Invites</a>
+    <a href="/admin/reports" class="hover:text-emerald-300 transition">Reports</a>
+    <a href="/admin/settings" class="hover:text-emerald-300 transition">Settings</a>
+  </nav>
+
+  <div class="relative flex items-center gap-4 group">
+    <span class="text-white text-sm hidden sm:block">Hello, <span class="font-bold"><%=user.username.toUpperCase()%></span></span>
+    <div class="w-10 h-10 rounded-full border-2 border-white/30 shadow bg-emerald-500 flex justify-center items-center cursor-pointer" id="profileDropdownToggle">
+      <h1 class="text-white font-bold"><%-user.username.slice(0,1).toUpperCase()%></h1>
+    </div>
+
+    <div id="profileDropdown" class="absolute top-full right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-[90] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100 origin-top-right">
+      <!-- <hr class="my-1 border-gray-200"> -->
+      <a href="/admin/logout" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">Logout</a>
+    </div>
+  </div>
+</header>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const profileDropdownToggle = document.getElementById('profileDropdownToggle');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    if (profileDropdownToggle && profileDropdown) {
+      profileDropdownToggle.addEventListener('click', function() {
+        profileDropdown.classList.toggle('opacity-0');
+        profileDropdown.classList.toggle('invisible');
+        profileDropdown.classList.toggle('scale-95');
+      });
+
+      // Close the dropdown if the user clicks outside of it
+      document.addEventListener('click', function(event) {
+        if (!profileDropdownToggle.contains(event.target) && !profileDropdown.contains(event.target)) {
+          profileDropdown.classList.add('opacity-0');
+          profileDropdown.classList.add('invisible');
+          profileDropdown.classList.add('scale-95');
+        }
+      });
+    }
+  });
+</script>

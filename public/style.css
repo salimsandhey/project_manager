@@ -1,0 +1,42 @@
+/* body{
+    background-color: black;
+} */
+
+#allTasks::-webkit-scrollbar {
+    display: none;
+}
+
+select option {
+    background-color: rgba(0, 0, 0, 0.895);
+    color: white;
+}
+
+/* In your global CSS file (e.g., styles.css or global.css) */
+
+/* Apply this if the description should have its own scrollbar */
+#task-description {
+  max-height: 100px; /* Example: Give it a fixed height */
+  overflow-y: auto;  /* Enable vertical scrolling when content exceeds max-height */
+  padding-right: 5px; /* Add some padding to prevent text from touching the scrollbar */
+}
+
+/* WebKit-specific pseudo-elements for the .task-description scrollbar */
+#task-description::-webkit-scrollbar {
+    background-color: transparent;
+  width: 4px; /* Width of the vertical scrollbar for the description */
+}
+
+/* .task-description::-webkit-scrollbar-track {
+  background: #2a2a2a; 
+  border-radius: 4px;
+} */
+
+#task-description::-webkit-scrollbar-thumb {
+  background-color: white; /* Emerald thumb for the description scrollbar */
+  border-radius: 4px;
+  border: 1px solid #2a2a2a; /* Small border */
+}
+
+#task-description::-webkit-scrollbar-thumb:hover {
+  background-color: #34d399; /* Darker emerald on hover */
+}

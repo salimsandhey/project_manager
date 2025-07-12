@@ -1,0 +1,28 @@
+  <%-include("./includes/header.ejs")%>
+  <div class="text-center px-6 py-20 max-w-2xl mx-auto">
+
+    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+      Task<span class="text-emerald-300">Manager</span>
+    </h1>
+
+    <p class="text-gray-300 text-lg mb-10">
+      Organize, Assign, and Track Your Team’s Work – All in One Place
+    </p>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+      <a href="/admin/register" class="px-6 py-3 text-sm font-semibold rounded-full bg-emerald-500 hover:bg-emerald-600 transition shadow-lg">
+        Register as Team Leader
+      </a>
+      <a href="/users/login" class="px-6 py-3 text-sm font-semibold rounded-full bg-white/10 border border-white/20 backdrop-blur hover:bg-white/20 transition shadow-lg">
+        Login
+      </a>
+    </div>
+
+    <p class="text-xs text-gray-500 mt-8">
+      Already team leader? <a href="/admin/login" class="underline text-white">login here</a>.
+    </p>
+
+  </div>
+
+</body>
+</html>

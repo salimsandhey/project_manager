@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Manager</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slide-out {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+
+        .animate-slide-in {
+            animation: slide-in 0.3s ease forwards;
+        }
+
+        .animate-slide-out {
+            animation: slide-out 0.3s ease forwards;
+        }
+    </style>
+
+</head>
+
+<body class="bg-[#121212] text-white min-h-screens">
+    <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-3"></div>
+
+    <%-body%>
+
+    <script>
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.innerHTML = `
+                <div class="flex items-center gap-3">
+                <div class="text-lg">
+                ${type === 'success' ? '✅' : '❌'}
+                </div>
+                <div>${message}</div>
+                </div>`;
+            toast.className = `
+                toast 
+                px-5 py-3 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 text-white shadow-lg
+                text-sm font-medium max-w-xs w-full animate-slide-in
+                ${type === 'success' ? 'border-green-400 text-green-200' : 'border-red-400 text-red-300'}`;
+            const container = document.getElementById('toast-container');
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('animate-slide-in');
+                toast.classList.add('animate-slide-out');
+                setTimeout(() => toast.remove(), 500);
+                }, 3000);
+            }
+    </script>
+    <script>
+        <% if (typeof success !== 'undefined' && success.length > 0) { %>
+        showToast("<%= success[0] %>", "success");
+        <% } %>
+
+        <% if (typeof error !== 'undefined' && error.length > 0) { %>
+        showToast("<%= error[0] %>", "error");
+        <% } %>
+    </script>
+
+</body>
+
+</html>

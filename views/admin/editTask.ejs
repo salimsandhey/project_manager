@@ -1,0 +1,81 @@
+<style>
+  select option {
+    background-color: rgba(0, 0, 0, 0.895);
+    color: white;
+}
+</style>
+<%-include("../includes/adminHeader")%>
+
+  <!-- Page Title -->
+  <div class="text-center py-10">
+    <h1 class="text-3xl font-semibold text-white">Edit Task</h1>
+    <p class="text-sm text-emerald-200 mt-2">Modify task details below and save changes</p>
+  </div>
+
+  <!-- Edit Form -->
+  <div class="max-w-4xl mx-auto px-6">
+    <form class="bg-white/5 backdrop-blur-lg border border-white/20 rounded-xl p-8 space-y-6 shadow-lg"
+    action="/admin/task/edit/<%=task._id%>?_method=PUT" method="post">
+      
+      <!-- Task Title -->
+      <div>
+        <label class="block text-sm text-emerald-200 mb-1">Task Title</label>
+        <input type="text" placeholder="Enter task title" class="w-full bg-transparent border border-gray-500 rounded px-4 py-2 outline-none text-white placeholder-gray-400" 
+        value="<%=task.title%>" name="title"/>
+      </div>
+
+      <!-- Assigned To -->
+      <div>
+        <label class="block text-sm text-emerald-200 mb-1">Assign To</label>
+        <select class="w-full bg-transparent border border-gray-500 rounded px-4 py-2 outline-none text-white" name="assignTo">
+          <% users.forEach((user)=>{%>
+            <option value="<%=user._id%>" <%=user.username === taskAssignedTo ? "selected" : "" %>><%=user.username%></option>
+          <%})%>
+        </select>
+      </div>
+
+      <!-- Category & Date -->
+      <div class="flex flex-col md:flex-row gap-6">
+        <div class="flex-1">
+          <label class="block text-sm text-emerald-200 mb-1">Due Date</label>
+          <input type="text" placeholder="Design, Dev..." class="w-full bg-transparent border border-gray-500 rounded px-4 py-2 outline-none text-white placeholder-gray-400" 
+          value="<%=task.dueDate%>" name="dueDate"/>
+        </div>
+        <div class="flex-1">
+          <label class="block text-sm text-emerald-200 mb-1">Date</label>
+          <input type="date" class="w-full bg-transparent border border-gray-500 rounded px-4 py-2 outline-none text-white placeholder-gray-400" 
+          value="<%=task.date%>" name="date"/>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-emerald-200 mb-1">Category</label>
+          <input type="text" placeholder="Design, Dev..." class="w-full bg-transparent border border-gray-500 rounded px-4 py-2 outline-none text-white placeholder-gray-400" 
+          value="<%=task.category%>" name="category"/>
+      </div>
+      <!-- Status -->
+      <!-- <div>
+        <label class="block text-sm text-emerald-200 mb-1">Status</label>
+        <select class="w-full bg-transparent border border-gray-500 rounded px-4 py-2 outline-none text-white" name="status">
+          <option <%= task.status==="new" ? "selected" : ""%>>New</option>
+          <option <%= task.status==="active" ? "selected" : ""%>>Active</option>
+          <option <%= task.status==="completed" ? "selected" : ""%>>Completed</option>
+          <option <%= task.status==="failed" ? "selected" : ""%>>Failed</option>
+        </select>
+      </div> -->
+
+      <!-- Description -->
+      <div>
+        <label class="block text-sm text-emerald-200 mb-1">Description</label>
+        <textarea placeholder="Enter task description..." rows="5" class="w-full bg-transparent border border-gray-500 rounded px-4 py-2 outline-none text-white placeholder-gray-400 resize-none" name="description"><%=task.description%>
+        </textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-right">
+        <button class="bg-emerald-500 hover:bg-emerald-600 px-6 py-3 rounded text-white text-sm font-medium transition">Save Changes</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
